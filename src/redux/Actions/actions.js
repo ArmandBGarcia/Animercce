@@ -51,7 +51,9 @@ import {
 
 export const getDetails = (id) => async (dispatch) => {
   try {
-    let productDetail = await axios(`http://localhost:3000/manga/${id}`);
+    let productDetail = await axios(
+      `https://animercce-back-production.up.railway.app/manga/${id}`
+    );
     return dispatch({ type: GET_DETAILS, payload: productDetail.data });
   } catch (err) {
     console.error(err);
@@ -69,7 +71,9 @@ export const deleteDetails = () => (dispatch) => {
 export function getMangas() {
   return async function (dispatch) {
     try {
-      let response = await axios.get(`http://localhost:3000/manga`);
+      let response = await axios.get(
+        `https://animercce-back-production.up.railway.app/manga`
+      );
       dispatch({
         type: GET_MANGAS,
         payload: response.data,
@@ -82,7 +86,9 @@ export function getMangas() {
 
 export const topMangas = () => async (dispatch) => {
   try {
-    let topMangas = await axios(`http://localhost:3000/manga/top`);
+    let topMangas = await axios(
+      `https://animercce-back-production.up.railway.app/manga/top`
+    );
     return dispatch({ type: TOP_MANGAS, payload: topMangas.data });
   } catch (err) {
     console.error(err);
@@ -93,7 +99,7 @@ export function getMangaByTitle(name) {
   return async function (dispatch) {
     try {
       // let manga = await axios.get(
-      //   `http://localhost:3000/manga/searchmanga?name=${name}`
+      //   `https://animercce-back-production.up.railway.app/manga/searchmanga?name=${name}`
       // );
       dispatch({
         type: GET_MANGA_NAME,
@@ -116,7 +122,7 @@ export const updateCart = (cart) => (dispatch) => {
 export function getGenres() {
   return async function (dispatch) {
     try {
-      // let allGenres = await axios.get(`http://localhost:3000/genres`);
+      // let allGenres = await axios.get(`https://animercce-back-production.up.railway.app/genres`);
       return dispatch({
         type: GET_GENRES,
         // payload: allGenres.data.genresDB,
@@ -132,7 +138,9 @@ export function getGenres() {
 export function getAnimes() {
   return async function (dispatch) {
     try {
-      let response = await axios.get(`http://localhost:3000/animes`);
+      let response = await axios.get(
+        `https://animercce-back-production.up.railway.app/animes`
+      );
       return dispatch({
         type: GET_ANIMES,
         payload: response.data.animesDB,
@@ -144,12 +152,16 @@ export function getAnimes() {
 }
 
 export const getAnimesDetails = (id) => async (dispatch) => {
-  let res = await axios.get(`http://localhost:3000/animes/${id}`);
+  let res = await axios.get(
+    `https://animercce-back-production.up.railway.app/animes/${id}`
+  );
   return dispatch({ type: GET_ANIME_DETAILS, payload: res.data });
 };
 
 export const getTopAnimes = () => async (dispatch) => {
-  let res = await axios.get(`http://localhost:3000/topAnimes`);
+  let res = await axios.get(
+    `https://animercce-back-production.up.railway.app/topAnimes`
+  );
   return dispatch({ type: GET_TOP_ANIMES, payload: res.data.topAnimesDB });
 };
 
@@ -161,7 +173,7 @@ export function getAnimeByTitle(name) {
   return async function (dispatch) {
     try {
       // let animes = await axios.get(
-      //   `http://localhost:3000/animes/name?name=${name}`
+      //   `https://animercce-back-production.up.railway.app/animes/name?name=${name}`
       // );
       dispatch({
         type: GET_ANIME_NAME,
@@ -220,10 +232,10 @@ export function orderAnimeByChapters(payload) {
 // OTHERS action
 
 // export function getUsers(email) {
-//   const url = `http://localhost:3000/users/${email}`;
+//   const url = `https://animercce-back-production.up.railway.app/users/${email}`;
 // var id = "86359f78-9835-474b-8e98-dd0eb7be0c32"
 // export function getUsers(email) {
-//   const url = `http://localhost:3000/login/${email}`;
+//   const url = `https://animercce-back-production.up.railway.app/login/${email}`;
 //   return async function (dispatch) {
 //     try {
 //       const resp = await axios.get(url);
@@ -246,21 +258,28 @@ export const setCategory = (state) => (dispatch) => {
 
 export const deleteAllItemsCart = (id) => async (dispatch) => {
   id.map(async (id) => {
-    await axios.delete(`http://localhost:3000/cart/${id}`);
+    await axios.delete(
+      `https://animercce-back-production.up.railway.app/cart/${id}`
+    );
   });
   return dispatch({ type: DELETE_ITEM_CART, payload: id });
 };
 
 export const deleteItemCart = (id) => async (dispatch) => {
-  let response = await axios.delete(`http://localhost:3000/cart/${id}`);
+  let response = await axios.delete(
+    `https://animercce-back-production.up.railway.app/cart/${id}`
+  );
   return dispatch({ type: DELETE_ITEM_CART, payload: id });
 };
 
 export const setCartItems = (item) => async (dispatch) => {
   if (!item.UserId) {
   } else {
-    // console.log("hola: ", await axios.post("http://localhost:3000/cart", item));
-    let response = await axios.post("http://localhost:3000/cart", item);
+    // console.log("hola: ", await axios.post("https://animercce-back-production.up.railway.app/cart", item));
+    let response = await axios.post(
+      "https://animercce-back-production.up.railway.app/cart",
+      item
+    );
     return dispatch({
       type: SET_CART_ITEMS,
       payload: { Product: response.data, login: true },
@@ -269,7 +288,9 @@ export const setCartItems = (item) => async (dispatch) => {
 };
 
 export const getCart = (userId) => async (dispatch) => {
-  const res = await axios.get(`http://localhost:3000/cart/${userId}`);
+  const res = await axios.get(
+    `https://animercce-back-production.up.railway.app/cart/${userId}`
+  );
   const response = res.data.map((item) => {
     return { Product: item, login: true };
   });
@@ -283,7 +304,7 @@ export function getAnimeFavorites(userId) {
   return async function (dispatch) {
     try {
       const resp = await axios.get(
-        `http://localhost:3000/animefavorites/${userId}`
+        `https://animercce-back-production.up.railway.app/animefavorites/${userId}`
       );
       const response = resp.data.map((item) => {
         return { Product: item, login: true };
@@ -302,7 +323,7 @@ export function getMangaFavorites(userId) {
   return async function (dispatch) {
     try {
       const resp = await axios.get(
-        `http://localhost:3000/mangafavorites/${userId}`
+        `https://animercce-back-production.up.railway.app/mangafavorites/${userId}`
       );
       const response = resp.data.map((item) => {
         return { Product: item, login: true };
@@ -326,7 +347,7 @@ export const addFavorite = (item) => async (dispatch) => {
   } else {
     if (item.category === "anime") {
       let response = await axios.post(
-        "http://localhost:3000/animefavorites",
+        "https://animercce-back-production.up.railway.app/animefavorites",
         item.product
       );
       console.log(response.data);
@@ -336,7 +357,7 @@ export const addFavorite = (item) => async (dispatch) => {
       });
     } else {
       let response = await axios.post(
-        "http://localhost:3000/mangafavorites",
+        "https://animercce-back-production.up.railway.app/mangafavorites",
         item.product
       );
       console.log(response.data);
@@ -369,7 +390,7 @@ export function editUser(email, obj) {
   return async function (dispatch) {
     console.log(email);
     console.log(obj);
-    const url = `http://localhost:3000/login/${email}`;
+    const url = `https://animercce-back-production.up.railway.app/login/${email}`;
     Swal.fire({
       title: "Editing user information.",
       text: "Are you okay with these changes?",
@@ -428,9 +449,12 @@ export function validateUser(obj) {
 export function googleAuth(tokenGoogle) {
   return async function (dispatch) {
     try {
-      const resp = await axios.post(`http://localhost:3000/login/auth/google`, {
-        id_token: tokenGoogle,
-      });
+      const resp = await axios.post(
+        `https://animercce-back-production.up.railway.app/login/auth/google`,
+        {
+          id_token: tokenGoogle,
+        }
+      );
       const { msg, user, token } = resp.data;
       // console.log(msg, user, token);
       localStorage.setItem("token", token);
@@ -464,7 +488,7 @@ export function googleAuth(tokenGoogle) {
 
 export function deleteUser(email) {
   return async function (dispatch) {
-    const url = `http://localhost:3000/login/${email}`;
+    const url = `https://animercce-back-production.up.railway.app/login/${email}`;
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -500,7 +524,9 @@ export function logOut() {
 
 export const getTotalPrice = (userId) => {
   return async function (dispatch) {
-    const resp = await axios.get(`http://localhost:3000/cart/${userId}`);
+    const resp = await axios.get(
+      `https://animercce-back-production.up.railway.app/cart/${userId}`
+    );
     const price = resp.data
       .map((d) => d.totalPrice)
       .reduce((a, b) => a + b)
@@ -510,7 +536,7 @@ export const getTotalPrice = (userId) => {
 };
 
 export const setSales = (obj) => {
-  const url = "http://localhost:3000/sales";
+  const url = "https://animercce-back-production.up.railway.app/sales";
   console.log({ obj });
   return async function (dispatch) {
     try {
@@ -526,7 +552,7 @@ export const setSales = (obj) => {
 export const getProductReviews = (productId, category) => async (dispatch) => {
   try {
     let response = await axios.get(
-      `http://localhost:3000/reviews/byproduct/${productId}?category=${category}`
+      `https://animercce-back-production.up.railway.app/reviews/byproduct/${productId}?category=${category}`
     );
     return dispatch({ type: GET_REVIEWS_PRODUCT, payload: response.data });
   } catch (err) {
@@ -537,7 +563,7 @@ export const getProductReviews = (productId, category) => async (dispatch) => {
 export const getUserReviews = (userId) => async (dispatch) => {
   try {
     const response = await axios.get(
-      `http://localhost:3000/reviews/byuser/${userId}`
+      `https://animercce-back-production.up.railway.app/reviews/byuser/${userId}`
     );
     return dispatch({ type: GET_REVIEWS_USER, payload: response.data });
   } catch (err) {
@@ -547,9 +573,12 @@ export const getUserReviews = (userId) => async (dispatch) => {
 
 export const postReview = (review) => async (dispatch) => {
   try {
-    const response = await axios.post(`http://localhost:3000/reviews`, {
-      ...review,
-    });
+    const response = await axios.post(
+      `https://animercce-back-production.up.railway.app/reviews`,
+      {
+        ...review,
+      }
+    );
     return dispatch({ type: POST_REVIEW, payload: response.data });
   } catch (err) {
     console.error(err);
@@ -569,7 +598,9 @@ export const adminDeleteReview = (reviewId) => async (dispatch) => {
     }).then((result) => {
       if (result.isConfirmed) {
         Swal.fire("Deleted!", "A review has been deleted.", "success");
-        axios.delete(`http://localhost:3000/reviews/admindel/${reviewId}`);
+        axios.delete(
+          `https://animercce-back-production.up.railway.app/reviews/admindel/${reviewId}`
+        );
         dispatch({
           type: DELETE_REVIEW_ADMIN,
           payload: reviewId,
@@ -597,7 +628,7 @@ export const userDeleteReview = (reviewId, userId) => async (dispatch) => {
       if (result.isConfirmed) {
         Swal.fire("Deleted!", "A review has been deleted.", "success");
         axios.delete(
-          `http://localhost:3000/reviews/userdel/${reviewId}?userId=${userId}`
+          `https://animercce-back-production.up.railway.app/reviews/userdel/${reviewId}?userId=${userId}`
         );
         dispatch({
           type: DELETE_REVIEW_USER,
@@ -619,7 +650,10 @@ export const refreshReviews = () => (dispatch) => {
 export const postWinnings = (profit) => {
   // console.log({ profit });
   try {
-    axios.post("http://localhost:3000/sales/winnings", { profit });
+    axios.post(
+      "https://animercce-back-production.up.railway.app/sales/winnings",
+      { profit }
+    );
   } catch (error) {
     console.log(error);
   }
@@ -628,7 +662,9 @@ export const postWinnings = (profit) => {
 export const getWinnings = () => {
   return async (dispatch) => {
     try {
-      const resp = await axios.get("http://localhost:3000/sales/winnings");
+      const resp = await axios.get(
+        "https://animercce-back-production.up.railway.app/sales/winnings"
+      );
       dispatch({ type: GET_WINNINGS, payload: resp.data });
     } catch (error) {
       console.log(error);
@@ -639,7 +675,9 @@ export const getWinnings = () => {
 export const getSales = () => {
   return async (dispatch) => {
     try {
-      const resp = await animerceApp.get("http://localhost:3000/sales");
+      const resp = await animerceApp.get(
+        "https://animercce-back-production.up.railway.app/sales"
+      );
       console.log(resp.data);
       dispatch({ type: GET_SALES, payload: resp.data });
     } catch (error) {
